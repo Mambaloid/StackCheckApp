@@ -1,8 +1,11 @@
 package ru.bimbom.stackcheckapp.ui.dashboard
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Group
+import androidx.compose.material.icons.filled.Movie
+import androidx.compose.material.icons.filled.Nature
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
@@ -10,14 +13,13 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.bimbom.stackcheckapp.R
 import ru.bimbom.stackcheckapp.ui.camera.CameraScreen
 import ru.bimbom.stackcheckapp.ui.home.HomeScreen
 import ru.bimbom.stackcheckapp.ui.menu.MenuScreen
@@ -48,7 +50,7 @@ fun DashboardScreen() {
                         },
                         icon = {
                             Icon(
-                                painter = painterResource(navItem.image),
+                                imageVector = navItem.image,
                                 contentDescription = navItem.title
                             )
                         },
@@ -63,7 +65,7 @@ fun DashboardScreen() {
         NavHost(
             navController = navController,
             startDestination = NavRoutes.Home.route,
-            modifier = Modifier.padding(padding)
+            modifier = Modifier.padding()
         ) {
             composable(NavRoutes.Home.route) {
                 HomeScreen()
@@ -81,18 +83,18 @@ fun DashboardScreen() {
 object NavBarItems {
     val BarItems = listOf(
         BarItem(
-            title = "Главная",
-            image = R.drawable.ic_home_24_filled,
+            title = "Персонажи",
+            image = Icons.Filled.Group,
             route = NavRoutes.Home.route
         ),
         BarItem(
-            title = "Меню",
-            image = R.drawable.ic_menu_24_filled,
+            title = "Локации",
+            image = Icons.Filled.Nature,
             route = NavRoutes.Menu.route
         ),
         BarItem(
-            title = "Камера",
-            image = R.drawable.ic_videocam_24_filled,
+            title = "Эпизоды",
+            image = Icons.Filled.Movie,
             route = NavRoutes.Cam.route
         )
     )
@@ -100,17 +102,15 @@ object NavBarItems {
 
 data class BarItem(
     val title: String,
-    @DrawableRes val image: Int,
+    val image: ImageVector,
     val route: String
 )
-
 
 sealed class NavRoutes(val route: String) {
     object Home : NavRoutes("home")
     object Menu : NavRoutes("menu")
     object Cam : NavRoutes("cam")
 }
-
 
 @Preview(showBackground = true)
 @Composable

@@ -17,13 +17,13 @@ import ru.bimbom.stackcheckapp.ui.theme.MenuBackColor
 
 //TODO реально вот так делать навигацию???
 @Composable
-fun MenuScreen(navController: NavController) {
+fun MenuScreen(navController: NavController? = null) {
     Box(
         modifier = Modifier
             .fillMaxSize()
             .background(MenuBackColor)
             .clickable {
-                navController.navigate(NavRoutes.Home.route) {
+                navController?.navigate(NavRoutes.Home.route) {
                     popUpTo(NavRoutes.Home.route)
                 }
             }
@@ -35,9 +35,8 @@ fun MenuScreen(navController: NavController) {
     }
 }
 
-//TODO и как делать если в превью гавно по типу NavController
-//@Preview(showBackground = true)
-//@Composable
-//fun CameraScreenPreview() {
-//    MenuScreen()
-//}
+@Preview(showBackground = true)
+@Composable
+fun CameraScreenPreview() {
+    MenuScreen()
+}
