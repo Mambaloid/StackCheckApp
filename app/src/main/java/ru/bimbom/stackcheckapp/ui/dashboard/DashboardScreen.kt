@@ -31,7 +31,6 @@ fun DashboardScreen() {
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar {
-                //TODO разобраться что это такое
                 val backStackEntry = navController.currentBackStackEntryAsState()
                 val currentRoute = backStackEntry.value?.destination?.route
 
@@ -39,7 +38,6 @@ fun DashboardScreen() {
                     NavigationBarItem(
                         selected = currentRoute == navItem.route,
                         onClick = {
-                            //TODO изучить вот это
                             navController.navigate(navItem.route) {
                                 popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
@@ -65,7 +63,7 @@ fun DashboardScreen() {
         NavHost(
             navController = navController,
             startDestination = NavRoutes.Home.route,
-            modifier = Modifier.padding()
+            modifier = Modifier.padding(padding)
         ) {
             composable(NavRoutes.Home.route) {
                 HomeScreen()

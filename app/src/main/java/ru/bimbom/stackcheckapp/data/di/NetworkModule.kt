@@ -15,10 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
 
-    //TODO исправить на константу
-    @Provides
-    fun provideBaseUrl(): String = "https://rickandmortyapi.com"
-
     @Provides
     @Singleton
     fun provideOkHttpClient(): OkHttpClient = OkHttpClient.Builder().apply {
@@ -31,10 +27,9 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
-        .baseUrl(baseUrl)
+    fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit = Retrofit.Builder()
+        .baseUrl(BASE_URL)
         .client(okHttpClient)
-        //TODO поменять на котлин-сериализатор (типа старое)
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
@@ -43,4 +38,7 @@ class NetworkModule {
     fun provideApiService(retrofit: Retrofit): RickAndMortyApi =
         retrofit.create(RickAndMortyApi::class.java)
 
+    companion object {
+        const val BASE_URL: String = "https://rickandmortyapi.com"
+    }
 }

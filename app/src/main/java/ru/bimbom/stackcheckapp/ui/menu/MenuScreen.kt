@@ -10,12 +10,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
-import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.compose.rememberNavController
 import ru.bimbom.stackcheckapp.ui.dashboard.NavRoutes
 import ru.bimbom.stackcheckapp.ui.theme.MenuBackColor
 
-//TODO реально вот так делать навигацию???
 @Composable
 fun MenuScreen(navController: NavController? = null) {
     Box(
