@@ -15,18 +15,38 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import ru.bimbom.stackcheckapp.navigation.Destination
+import ru.bimbom.stackcheckapp.navigation.NavigationAction
+import ru.bimbom.stackcheckapp.navigation.Navigator
 import ru.bimbom.stackcheckapp.ui.dashboard.episode.EpisodeScreen
 import ru.bimbom.stackcheckapp.ui.dashboard.characters.CharacterScreen
 import ru.bimbom.stackcheckapp.ui.dashboard.location.LocationScreen
+import ru.bimbom.stackcheckapp.utils.ObserveAsEvents
 
 @Composable
-fun DashboardScreen() {
+fun DashboardScreen(
+    viewModel: DashboardViewModel = hiltViewModel()
+) {
     val navController = rememberNavController()
+    val navigator = viewModel.getNavigator()
+
+    ObserveAsEvents(flow = navigator.navigationActions) { action ->
+        when(action) {
+            is NavigationAction.Navigate -> navController.navigate(
+                action.destination.route
+            ) {
+                action.navOptions(this)
+            }
+            NavigationAction.NavigateUp -> navController.navigateUp()
+        }
+    }
+
     Scaffold(
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
@@ -35,11 +55,13 @@ fun DashboardScreen() {
                 val backStackEntry = navController.currentBackStackEntryAsState()
                 val currentRoute = backStackEntry.value?.destination?.route
 
+
+
                 NavBarItems.BarItems.forEach { navItem ->
                     NavigationBarItem(
-                        selected = currentRoute == navItem.route,
+                        selected = currentRoute == navItem.destination.route,
                         onClick = {
-                            navController.navigate(navItem.route) {
+                            viewModel.navigateTo(navItem.destination) {
                                 popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
                                 }
@@ -63,16 +85,16 @@ fun DashboardScreen() {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = NavRoutes.Character.route,
+            startDestination = navigator.startDestination.route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(NavRoutes.Character.route) {
+            composable(Destination.CharactersScreen.route) {
                 CharacterScreen()
             }
-            composable(NavRoutes.Location.route) {
+            composable(Destination.LocationsScreen.route) {
                 LocationScreen()
             }
-            composable(NavRoutes.Episode.route) {
+            composable(Destination.EpisodesScreen.route) {
                 EpisodeScreen()
             }
         }
@@ -84,17 +106,17 @@ object NavBarItems {
         BarItem(
             title = "Персонажи",
             image = Icons.Filled.Group,
-            route = NavRoutes.Character.route
+            destination = Destination.CharactersScreen
         ),
         BarItem(
             title = "Локации",
             image = Icons.Filled.Nature,
-            route = NavRoutes.Location.route
+            destination = Destination.LocationsScreen
         ),
         BarItem(
             title = "Эпизоды",
             image = Icons.Filled.Movie,
-            route = NavRoutes.Episode.route
+            destination = Destination.EpisodesScreen
         )
     )
 }
@@ -102,14 +124,8 @@ object NavBarItems {
 data class BarItem(
     val title: String,
     val image: ImageVector,
-    val route: String
+    val destination: Destination
 )
-
-sealed class NavRoutes(val route: String) {
-    object Character : NavRoutes("character")
-    object Location : NavRoutes("location")
-    object Episode : NavRoutes("episode")
-}
 
 @Preview(showBackground = true)
 @Composable
