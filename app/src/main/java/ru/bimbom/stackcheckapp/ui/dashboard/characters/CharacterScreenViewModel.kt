@@ -1,4 +1,4 @@
-package ru.bimbom.stackcheckapp.ui.home
+package ru.bimbom.stackcheckapp.ui.dashboard.characters
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

@@ -11,5 +11,5 @@ val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
 
 val CharactersBackColor = Color(0xFF3EABE6)
-val CameraBackColor = Color(0xFFd67aa4)
-val MenuBackColor = Color(0xFF90d67a)
+val EpisodeBackColor = Color(0xFFd67aa4)
+val LocationBackColor = Color(0xFF90d67a)

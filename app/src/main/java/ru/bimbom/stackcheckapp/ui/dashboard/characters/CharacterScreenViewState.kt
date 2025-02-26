@@ -1,4 +1,4 @@
-package ru.bimbom.stackcheckapp.ui.home
+package ru.bimbom.stackcheckapp.ui.dashboard.characters
 
 import ru.bimbom.stackcheckapp.data.models.Character
 

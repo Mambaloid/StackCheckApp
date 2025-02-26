@@ -1,4 +1,4 @@
-package ru.bimbom.stackcheckapp.ui.home
+package ru.bimbom.stackcheckapp.ui.dashboard.characters
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -32,17 +32,17 @@ import ru.bimbom.stackcheckapp.ui.theme.CharactersBackColor
 import ru.bimbom.stackcheckapp.ui.theme.Pink80
 
 @Composable
-fun HomeScreen() {
+fun CharacterScreen() {
     val viewModel = hiltViewModel<CharacterScreenViewModel>()
     val state by viewModel.state.collectAsState()
     state.error?.let {
         Toast.makeText(LocalContext.current, it, Toast.LENGTH_SHORT).show()
     }
-    HomeContent(viewModel, state)
+    CharacterContent(viewModel, state)
 }
 
 @Composable
-fun HomeContent(
+fun CharacterContent(
     viewModel: CharacterScreenViewModel,
     state: CharacterScreenViewState
 ) {
@@ -96,6 +96,6 @@ fun SimpleItemView(
 
 @Preview(showBackground = true)
 @Composable
-fun CameraScreenPreview() {
-    HomeScreen()
+fun CharacterScreenPreview() {
+    CharacterScreen()
 }

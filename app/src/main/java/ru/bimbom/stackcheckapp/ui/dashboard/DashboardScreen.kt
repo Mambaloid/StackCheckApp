@@ -20,9 +20,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ru.bimbom.stackcheckapp.ui.camera.CameraScreen
-import ru.bimbom.stackcheckapp.ui.home.HomeScreen
-import ru.bimbom.stackcheckapp.ui.menu.MenuScreen
+import ru.bimbom.stackcheckapp.ui.dashboard.episode.EpisodeScreen
+import ru.bimbom.stackcheckapp.ui.dashboard.characters.CharacterScreen
+import ru.bimbom.stackcheckapp.ui.dashboard.location.LocationScreen
 
 @Composable
 fun DashboardScreen() {
@@ -31,6 +31,7 @@ fun DashboardScreen() {
         modifier = Modifier.fillMaxSize(),
         bottomBar = {
             NavigationBar {
+                //TODO убрать ненужную обработку кнопки назад, разобраться
                 val backStackEntry = navController.currentBackStackEntryAsState()
                 val currentRoute = backStackEntry.value?.destination?.route
 
@@ -62,17 +63,17 @@ fun DashboardScreen() {
     ) { padding ->
         NavHost(
             navController = navController,
-            startDestination = NavRoutes.Home.route,
+            startDestination = NavRoutes.Character.route,
             modifier = Modifier.padding(padding)
         ) {
-            composable(NavRoutes.Home.route) {
-                HomeScreen()
+            composable(NavRoutes.Character.route) {
+                CharacterScreen()
             }
-            composable(NavRoutes.Menu.route) {
-                MenuScreen(navController)
+            composable(NavRoutes.Location.route) {
+                LocationScreen()
             }
-            composable(NavRoutes.Cam.route) {
-                CameraScreen()
+            composable(NavRoutes.Episode.route) {
+                EpisodeScreen()
             }
         }
     }
@@ -83,17 +84,17 @@ object NavBarItems {
         BarItem(
             title = "Персонажи",
             image = Icons.Filled.Group,
-            route = NavRoutes.Home.route
+            route = NavRoutes.Character.route
         ),
         BarItem(
             title = "Локации",
             image = Icons.Filled.Nature,
-            route = NavRoutes.Menu.route
+            route = NavRoutes.Location.route
         ),
         BarItem(
             title = "Эпизоды",
             image = Icons.Filled.Movie,
-            route = NavRoutes.Cam.route
+            route = NavRoutes.Episode.route
         )
     )
 }
@@ -105,9 +106,9 @@ data class BarItem(
 )
 
 sealed class NavRoutes(val route: String) {
-    object Home : NavRoutes("home")
-    object Menu : NavRoutes("menu")
-    object Cam : NavRoutes("cam")
+    object Character : NavRoutes("character")
+    object Location : NavRoutes("location")
+    object Episode : NavRoutes("episode")
 }
 
 @Preview(showBackground = true)
