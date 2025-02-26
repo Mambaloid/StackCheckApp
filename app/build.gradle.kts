@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.hilt)
     kotlin("kapt")
+    alias(libs.plugins.google.gms.google.services)
 }
 
 android {
@@ -55,6 +56,7 @@ dependencies {
     implementation(libs.androidx.navigation.compose)
     implementation(libs.retrofit)
     implementation(libs.hilt.android)
+    implementation(libs.firebase.messaging)
     kapt(libs.hilt.android.compiler)
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.hilt.navigation.compose)
