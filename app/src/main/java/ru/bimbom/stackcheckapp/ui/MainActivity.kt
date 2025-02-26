@@ -12,7 +12,6 @@ import ru.bimbom.stackcheckapp.ui.theme.StackCheckAppTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        //TODO разобраться
         enableEdgeToEdge()
         setContent {
             StackCheckAppTheme {

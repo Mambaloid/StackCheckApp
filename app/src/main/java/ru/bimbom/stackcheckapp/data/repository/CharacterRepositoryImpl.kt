@@ -11,7 +11,7 @@ class CharacterRepositoryImpl(
     private val rickAndMortyApi: RickAndMortyApi
 ) : CharacterRepository {
 
-    override suspend fun getAllCharacters(): RickAndMortyResponse = withContext(Dispatchers.IO) {
+    override suspend fun getFirstPageCharacters(): RickAndMortyResponse = withContext(Dispatchers.IO) {
         rickAndMortyApi.getAllCharacters()
     }
 
