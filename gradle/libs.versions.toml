@@ -1,5 +1,6 @@
 [versions]
 agp = "8.7.1"
+firebaseBom = "33.9.0"
 kotlin = "2.0.0"
 coreKtx = "1.10.1"
 junit = "4.13.2"
@@ -17,7 +18,6 @@ retrofitConverterGson = "2.11.0"
 hiltNavigationCompose = "1.2.0"
 hiltPlugin = "2.51.1"
 googleGmsGoogleServices = "4.4.2"
-firebaseMessaging = "24.1.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -42,7 +42,10 @@ hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hiltA
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hiltAndroid" }
 logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "loggingInterceptor" }
 retrofit-converter-gson = { group = "com.squareup.retrofit2", name= "converter-gson", version.ref = "retrofitConverterGson" }
-firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging", version.ref = "firebaseMessaging" }
+
+firebase-bom = { module = "com.google.firebase:firebase-bom", version.ref = "firebaseBom" }
+firebase-inappmessaging-display = { module = "com.google.firebase:firebase-inappmessaging-display" }
+firebase-messaging = { group = "com.google.firebase", name = "firebase-messaging" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
