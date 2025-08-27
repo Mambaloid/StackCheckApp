@@ -9,6 +9,12 @@ pluginManagement {
         }
         mavenCentral()
         gradlePluginPortal()
+        maven {
+            url = uri("http://developer.huawei.com/repo/")
+            isAllowInsecureProtocol = true
+        }
+        maven { url = uri("https://pushsdk.org") }
+        maven { url = uri("https://artifactory-external.vkpartner.ru/artifactory/maven") }
     }
 }
 dependencyResolutionManagement {
@@ -16,6 +22,12 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url = uri("http://developer.huawei.com/repo/")
+            isAllowInsecureProtocol = true
+        }
+        maven { url = uri("https://pushsdk.org") }
+        maven { url = uri("https://artifactory-external.vkpartner.ru/artifactory/maven") }
     }
 }
 

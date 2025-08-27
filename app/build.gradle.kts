@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId = "ru.bimbom.stackcheckapp"
-        minSdk = 21
+        minSdk = 23
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -59,6 +59,8 @@ dependencies {
     implementation(libs.logging.interceptor)
     implementation(libs.androidx.hilt.navigation.compose)
     implementation(libs.retrofit.converter.gson)
+//    implementation(libs.ru.store.sdk)
+    implementation(libs.wings)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
